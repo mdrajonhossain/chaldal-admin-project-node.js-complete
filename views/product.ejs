@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="HTML,CSS,XML,bootstrap,login form, website, JavaScript">
+  <meta name="author" content="Vishal Bait">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="./stylesheets/dashboard.css">
+</head>
+<body>
+  <%- include('./header.ejs'); %>
+ 
+  <div class="hing" onclick="hiddenfunct()">></div>
+  <div class="bodys">
+
+
+    <!-- ===================== Sitebar Manu include page======================== -->
+  <div class="sitebar" id="sitebar" style="display: block">   
+    <%- include('./sitebar.ejs'); %>
+  </div>
+
+
+
+  <div class="container-fluid textaria">
+      <!-- header of Title -->
+    <div class="text-center text-info py-3"><h3>Products Forms</h3></div>
+  
+  
+    <!-- ==================start Product Forms============================== -->
+    <form action="/productdatabasing" method="post" enctype="multipart/form-data">      
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">Catagory Type</label>
+            <div class="col">
+              <select class="select" name="catagorytype" class="form-select"aria-label="Default select example">                  
+                <% productitem.map((cataitem, index)=> {%>
+                  <option selected>Selected</option>
+                  <option selected value='<%= cataitem.catagoryname %>'><%= cataitem.catagoryname %></option>
+                  <% })%>
+                </select>              
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">Product Name</label>
+            <input type="text" name="productname" id="form3Example1" class="form-control" placeholder="Product Name" required/>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example1">Product Price *Tk</label>
+          <input type="number" name="productprice" id="form3Example1" class="form-control" required/>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="form-outline">
+            <label class="form-label" for="form3Example2">Product Image </label>
+            <input type="file" name="prodage" id="form3Example2" required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col">
+          <label class="form-label" for="form3Example1">Product Size</label>
+          <div class="form-outline">
+            <select class="select" name="productsize" class="form-select"aria-label="Default select example">
+              <option selected value="Smal">Smal</option>
+              <option value="Medium">Medium</option>
+              <option value="Large">Large</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="form3Example1">Product Offer</label>
+          <div class="form-outline">
+            <select class="select" name="productoffer" class="form-select"aria-label="Default select example">              
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="form3Example2">Product Offer Price *Tk</label>
+          <div class="form-outline">
+            <input type="number" id="favcolor" name="productofferprice" class="form-control" required/>            
+            <br/>
+          </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="form3Example2">Product Color </label>
+          <div class="form-outline">
+            <input type="color" id="favcolor" name="productcolor" value="#AFFF33" class="form-control" required/>            
+            <br/>
+          </div>
+        </div>      
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </div>
+    </form>
+  <!-- ==================End Product Forms============================== -->
+
+
+
+    <!-- database to data view  -->
+    <!-- =============Out of Offer List Product 1st=================================== -->    
+    <button type="button" class="btn btn-warning" data-toggle="modal" 
+      data-target=".bd-example-modal-lg">Out of Offer List Product</button>
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="py-3 px-2" id="outoffoffer"><h3></h3></div>
+          <table class="table table-hover">
+            <thead>
+              <tr>                
+                <th scope="col">Product Image </th>
+                <th scope="col">Product Name & Color</th>
+                <th scope="col">Price</th>
+                <th scope="col">Offer</th>
+                <th scope="col">Offer Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>              
+              
+              <% producsts.filter(word => word.productoffer === "No").map((data, index)=> { %>              
+              <tr>              
+                <td>
+                  <img src="<%= data.productimage %>" alt="Girl in a jacket" width="70" height="40">
+                </td>
+                <td style="background:<%=data.productcolor%>"><%= data.productname %></td>                
+                <td><%= data.productprice %> Tk</td>                
+                <td class="countoutoffoffer"><%= data.productoffer %></td>                
+                <td><%= data.productofferprice %> Tk</td>
+                <td>
+                  <a class="btn btn-danger" href="/productdele/<%= data._id%>">Delete</a>
+                </td>
+                <td>
+                  <a class="btn btn-warning" href="/productoffer/<%= data._id%>">Offer Proccess</a>
+                </td>
+              </tr> 
+              <% })%>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  
+    <!-- =============Offer of Product List View 2nd=================================== -->    
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-exam-modal-lg">
+      Offer of Product List
+    </button>
+
+    <div class="modal fade bd-exam-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="py-3 px-2" id="countoffoffershow"><h3></h3></div>
+          <table class="table table-hover">
+            <thead>
+              <tr>                
+                <th scope="col">Product Image </th>
+                <th scope="col">Product Name & Color</th>
+                <th scope="col">Price</th>
+                <th scope="col">Offer</th>
+                <th scope="col">Offer Price</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% producsts.filter(word => word.productoffer === "Yes").map((data, index)=> { %>
+              <tr>              
+                <td>
+                  <img src="<%= data.productimage %>" alt="Girl in a jacket" width="70" height="40">
+                </td>
+                <td style="background:<%=data.productcolor%>"><%= data.productname %></td>                
+                <td><%= data.productprice %> Tk</td>                
+                <td class="countoffoffer"><%= data.productoffer %></td>                
+                <td><%= data.productofferprice %> Tk</td>
+                <td>
+                  <a class="btn btn-danger" href="/productdele/<%= data._id%>">Delete</a>
+                </td>
+                <td>
+                  <a class="btn btn-primary" href="/productofferexit/<%= data._id%>">Offer Out</a>
+                </td>
+              </tr> 
+              <% })%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>    
+  </div>
+</div>
+
+
+
+<!-- ===================== start is the Css Stylesheet ===========================-->
+<style>
+  body{
+    overflow-y: hidden;
+  }
+</style>
+
+
+<!-- ===================== start is the JavaScript ===========================-->
+<script>
+  function hiddenfunct(){
+    var x = document.getElementById("sitebar");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+        } 
+        else
+        {
+          x.style.display = "none";
+        }
+  }
+
+  // ======================// Out of Offer List Product 1st ======================//
+  var count = document.getElementsByClassName("countoutoffoffer");
+  document.getElementById("outoffoffer").innerHTML = "Out of Product Offer count: "+ count.length;
+  
+
+  // ======================// Offer List Product 2nd ======================//
+  var countoffoffer = document.getElementsByClassName("countoffoffer");
+  document.getElementById("countoffoffershow").innerHTML = "Out of Product Offer count: "+ countoffoffer.length;
+</script>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background:#ecc766; position: relative;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/dashboardpancel">
+      <img src="https://chaldn.com/asset/Egg.Grocery.Fabric/Egg.Grocery.Web1/1.5.0+Release-2050/Default/components/header/Header/images/logo-small.png?q=low&webp=1&alpha=1" alt="Girl in a jacket" width="110" height="40">      
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Format</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active ee" aria-current="page" href="#">Insert</a>
+        </li>
+
+        
+
+        <li class="nav-item">
+          <a class="nav-link active login" aria-current="page" onclick="profile()">Profile</a>
+        </li>
+
+        <div class="profile" id="profile" style="display: none; color: white !important">
+          <a class="nav-link" aria-current="page">History</a>
+          <a class="nav-link" aria-current="page">Setting</a> 
+          <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+        </div>
+
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<script>
+  
+
+  function profile(){
+    var x = document.getElementById("profile");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  }
+</script>
+
+
+<style>
+  /* .login{
+    z-index: 5;
+    position: fixed;
+    top: 5px;
+    right: 10px;
+  } */
+
+  .navbar-light .navbar-nav .nav-link {
+    color: white;
+  }
+
+  .login:hover{
+    color: tomato !important    
+  }
+
+  @media screen and (min-width: 993px) {
+  .login {
+    z-index: 5;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;    
+  }
+  .profile{
+    z-index: 5;
+    position: fixed;
+    width: 200px;
+    right: 0px;
+    box-sizing: border-box;
+    padding: 5px 20px 5px 20px;
+    top: 66px;
+    height: auto;
+    background: rgba(128, 185, 171, 0.808);    
+    border-radius: 2%;
+    cursor: pointer;
+    color: white !important;
+  }
+
+  
+}
+
+@media screen and (max-width: 993px) {
+  .profile{
+    display: none;
+    cursor: pointer;
+    color: white !important;
+  }
+}
+
+
+
+</style>

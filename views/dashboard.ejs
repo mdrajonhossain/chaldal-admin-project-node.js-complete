@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="HTML,CSS,XML,bootstrap,login form, website, JavaScript">
+  <meta name="author" content="Vishal Bait">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+  <link rel="stylesheet" href="./stylesheets/dashboard.css">
+</head>
+<body>
+
+
+  <%- include('./header.ejs'); %>
+  
+
+  <div class="hing" onclick="hiddenfunct()">></div>
+
+  <div class="bodys">
+
+
+
+  <div class="sitebar" id="sitebar" style="display: block">   
+    <%- include('./sitebar.ejs'); %>
+  </div>
+
+
+
+  <div class="container-fluid textaria">
+    Admin Panel  
+  </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hiddenfunct(){
+    var x = document.getElementById("sitebar");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+</body>
+</html>

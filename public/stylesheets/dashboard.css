@@ -1,0 +1,36 @@
+.bodys{
+  display: flex;
+  height: 100vh;
+}
+.hing{
+  color: white;
+  background: rgb(247 97 37);
+  font-size: 20px;
+  left: 0px;
+  top: 12%;  
+  width: 20px;
+  cursor: pointer;
+  position: fixed;
+  z-index: 5;
+  border-radius: 10%;
+}
+
+
+.hing:hover{
+  color: white;
+  background: rgb(247 97 37);
+  font-size: 40px;
+  width: 40px;
+  cursor: pointer;
+  border-radius: 5% 5% 5% 5%;  
+}
+
+.sitebar{  
+  width: 280px;
+  transition: width 20s;  
+}
+
+
+.textaria{
+  background: lightgray;
+}
