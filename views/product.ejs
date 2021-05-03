@@ -33,19 +33,31 @@
   
     <!-- ==================start Product Forms============================== -->
     <form action="/productdatabasing" method="post" enctype="multipart/form-data">      
-      <div class="row mb-4">
+      <div class="row mb-6">
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example1">Catagory Type</label>
             <div class="col">
               <select class="select" name="catagorytype" class="form-select"aria-label="Default select example">                  
-                <% productitem.map((cataitem, index)=> {%>
-                  <option selected>Selected</option>
+                <% productitem.map((cataitem, index)=> {%>                  
                   <option selected value='<%= cataitem.catagoryname %>'><%= cataitem.catagoryname %></option>
-                  <% })%>
+                <% })%>
                 </select>              
             </div>
+
+            
+
+
           </div>
+        </div>
+
+        <div class="col">
+          <label class="form-label" for="form3Example1">Add SubCatagory Item</label>
+          <select class="select" name="subcatagorytype" class="form-select"aria-label="Default select example">                  
+            <% subcata.map((cataitem, index)=> {%>                  
+              <option selected value='<%= cataitem.catagoryname %>'><%= cataitem.subcatagoryname %></option>
+            <% })%>
+            </select>              
         </div>
 
 

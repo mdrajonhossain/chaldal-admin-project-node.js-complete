@@ -7,6 +7,8 @@ var multer  = require('multer');
 var Auth = require('../models/Auth');
 var Catagorymodel = require('../models/Catagorymodel');
 var Products = require('../models/Products');
+var Subcatagorymodel = require('../models/Subcatagorymodel');
+
 const fs = require('fs').promises;
 
 var url = 'http://192.168.2.103:3000';
@@ -26,6 +28,7 @@ var storage = multer.diskStorage({
 })
 var upload = multer({ storage: storage })
 
+ 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -88,6 +91,15 @@ router.get('/catagoryget', function(req, res, next) {
 });
 
 
+router.get('/subcatagoryget', function(req, res, next) {
+	Catagorymodel.find({}, function(err, catagoryitems){		
+		Subcatagorymodel.find({}, function(err, subcatagory){		
+			res.render('subcatagory',{catagoryitems:catagoryitems, subcatagory:subcatagory});		
+		})
+	})
+});
+
+
 router.get('/catagorydel/:id', (req, res) => {	  
 	Catagorymodel.findByIdAndRemove(req.params.id, function (err, data) {		
 		res.redirect(url+'/catagoryget');
@@ -95,12 +107,14 @@ router.get('/catagorydel/:id', (req, res) => {
 })
 
 
+
 router.post('/postcatagory', (req, res) => {
 	d = new Date();
    const catagorytime = d.toLocaleString();	
+    
 
 	const catagor = new Catagorymodel({
-			   catagoryname:req.body.catagoryname,
+			   catagoryname:req.body.catagoryname,			   
 			   catagorytime:catagorytime });
 			   catagor.save();
 	res.redirect('catagoryget');
@@ -111,9 +125,11 @@ router.get('/productget', function(req, res, next) {
 	if(!req.session.username){
 		res.render('index');
 	  }else{
-		Catagorymodel.find({}, function(err, productitem){		
-			Products.find({}, function(err, producsts){						
-				res.render('product',{producsts:producsts, productitem:productitem});		
+		  Catagorymodel.find({}, function(err, productitem){		
+			  Products.find({}, function(err, producsts){						
+				Subcatagorymodel.find({}, function(err, subcata){		
+					res.render('product',{producsts:producsts, productitem:productitem, subcata:subcata});		
+			})
 			})
 		})
 	  } 
@@ -128,6 +144,7 @@ router.post('/productdatabasing', upload.single('prodage'),(req, res) => {
    		const producttime = d.toLocaleString();
 		   const productsave = new Products({
 				catagorytype:req.body.catagorytype,
+				subcatagorytype:req.body.subcatagorytype,
 				productname:req.body.productname,
 				productprice:req.body.productprice,
 				productimage:productimage,
@@ -140,6 +157,24 @@ router.post('/productdatabasing', upload.single('prodage'),(req, res) => {
 			productsave.save();
 	res.redirect('productget');
 })
+
+
+router.use('/profile', express.static('upload'));
+router.post('/subpostcatagory', upload.single('subcatagoryimage'),(req, res) => {
+
+	const subcatagoryimage = `${url}/profile/${req.file.filename}`	
+		d = new Date();
+   		const producttime = d.toLocaleString();
+		   const productsave = new Subcatagorymodel({
+				subcatagoryimage:subcatagoryimage,
+				subcatagorytype:req.body.subcatagorytype,
+				subcatagoryname:req.body.subcatagoryname,				
+				createdate:producttime,
+				updatedate:producttime});
+			productsave.save();
+	res.redirect(url+'/subcatagoryget');
+})
+
 
 
 router.get('/productdele/:id', (req, res) => {
@@ -166,7 +201,8 @@ router.get('/productofferexit/:id', (req, res) => {
 })
 
 
- 
+
+
 
 
 
@@ -180,8 +216,8 @@ router.get('/productgetapi', function(req, res, next) {
 	})
 });
 
-
-
-
+ 
+  
 
 module.exports = router;
+

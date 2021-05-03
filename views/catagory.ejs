@@ -35,7 +35,9 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Add Catagory</label>
         <input type="text" class="form-control"  required name="catagoryname" aria-describedby="emailHelp" placeholder="Enter Add Catagory">
-      </div> 
+      </div>
+       
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     
@@ -44,7 +46,7 @@
       <thead>
         <tr>
           <th scope="col">SL</th>
-          <th scope="col">Catagory Item</th>
+          <th scope="col">Catagory Item</th>          
           <th scope="col">Date and Time</th>
           <th scope="col">Action</th>
         </tr>
@@ -54,7 +56,7 @@
         <tbody>
           <tr>
             <th scope="row"><%= index+1%></th>
-            <td><%= cataitem.catagoryname%></td>
+            <td><%= cataitem.catagoryname%></td>            
             <td><%= cataitem.catagorytime%></td>            
             <td>
               <a class="btn btn-danger" href="/catagorydel/<%= cataitem._id%>">Delete</a>              
@@ -80,7 +82,7 @@
   }
 
   .catagorydeldiv{
-    height: 300px;
+    height: 260px;
     overflow-y: scroll;
   }
 </style>

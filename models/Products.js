@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 
-const ProductsSchema = new Schema({     
+const ProductsSchema = new Schema({           
     catagorytype : String,
+    subcatagorytype : String,
     productname : String,
     productprice : String,
     productimage : String,
@@ -13,7 +14,7 @@ const ProductsSchema = new Schema({
     productofferprice : String,
     productcolor: String,  
     createdate: String,
-    updatedate: String
+    updatedate: String,    
 })
 
 const Products = mongoose.model('Products', ProductsSchema)
