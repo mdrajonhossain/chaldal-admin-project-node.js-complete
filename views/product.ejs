@@ -55,7 +55,7 @@
           <label class="form-label" for="form3Example1">Add SubCatagory Item</label>
           <select class="select" name="subcatagorytype" class="form-select"aria-label="Default select example">                  
             <% subcata.map((cataitem, index)=> {%>                  
-              <option selected value='<%= cataitem.catagoryname %>'><%= cataitem.subcatagoryname %></option>
+              <option selected value='<%= cataitem.subcatagoryname %>'><%= cataitem.subcatagoryname %></option>
             <% })%>
             </select>              
         </div>

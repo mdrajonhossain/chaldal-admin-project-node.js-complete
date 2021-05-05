@@ -1,6 +1,6 @@
+var createError = require('http-errors');
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 var multer  = require('multer');
@@ -8,27 +8,29 @@ var Auth = require('../models/Auth');
 var Catagorymodel = require('../models/Catagorymodel');
 var Products = require('../models/Products');
 var Subcatagorymodel = require('../models/Subcatagorymodel');
-
 const fs = require('fs').promises;
+ 
+var cors = require('cors');
+router.use(cors());
 
-var url = 'http://192.168.2.103:3000';
+var url = 'http://192.168.2.103:30001';
 
 var session = require('express-session');
 router.use(session({
-  name : 'app.sid',
-  secret: "1234567890QWERTY",
-  resave: true,
-  saveUninitialized: true
+	name : 'app.sid',
+	secret: "1234567890QWERTY",
+	resave: true,
+	saveUninitialized: true
 }));
+ 
 
 var storage = multer.diskStorage({
-  destination: './upload',
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '.jpg')}
-})
-var upload = multer({ storage: storage })
-
- 
+	destination: './upload',
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + '.jpg')}
+	})
+	var upload = multer({ storage: storage })
+	
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -201,21 +203,24 @@ router.get('/productofferexit/:id', (req, res) => {
 })
 
 
-
-
-
-
-
-
-
+const data = [
+{name:"asdfasdf", age:"15"},
+{name:"asdfasdf", age:"15"},
+{name:"asdfasdf", age:"15"},
+{name:"asdfasdf", age:"15"},
+{name:"asdfasdf", age:"15"}
+]
 
 // ==========================// React.js Rest --API
-router.get('/productgetapi', function(req, res, next) {	
-		Products.find({}, function(err, producsts){	
-			res.json({ producsts: producsts })
-	})
+
+router.get('/productgetapi', cors(),function(req, res, next) {	
+		Products.find({}, function(err, dataa){			
+			res.json( {dataa:dataa});
+		})
+	
 });
 
+ 
  
   
 
