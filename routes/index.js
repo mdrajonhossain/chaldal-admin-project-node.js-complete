@@ -177,6 +177,12 @@ router.post('/subpostcatagory', upload.single('subcatagoryimage'),(req, res) => 
 	res.redirect(url+'/subcatagoryget');
 })
 
+router.get('/subproductdele/:id', (req, res) => {
+	
+		Subcatagorymodel.findByIdAndRemove(req.params.id, function (err, data) {
+			res.redirect(url+'/subcatagoryget');
+	})	
+})
 
 
 router.get('/productdele/:id', (req, res) => {

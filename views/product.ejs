@@ -38,9 +38,12 @@
           <div class="form-outline">
             <label class="form-label" for="form3Example1">Catagory Type</label>
             <div class="col">
-              <select class="select" name="catagorytype" class="form-select"aria-label="Default select example">                  
+              <select class="select" name="catagorytype" class="form-select"aria-label="Default select example" required>                  
+                  <option selected value="" disabled="disabled">Choose an option</option>
                 <% productitem.map((cataitem, index)=> {%>                  
-                  <option selected value='<%= cataitem.catagoryname %>'><%= cataitem.catagoryname %></option>
+                  <option value='<%= cataitem.catagoryname %>'>
+                    <%= cataitem.catagoryname %>                    
+                  </option>
                 <% })%>
                 </select>              
             </div>
@@ -53,9 +56,12 @@
 
         <div class="col">
           <label class="form-label" for="form3Example1">Add SubCatagory Item</label>
-          <select class="select" name="subcatagorytype" class="form-select"aria-label="Default select example">                  
-            <% subcata.map((cataitem, index)=> {%>                  
-              <option selected value='<%= cataitem.subcatagoryname %>'><%= cataitem.subcatagoryname %></option>
+          <select class="select" name="subcatagorytype" class="form-select"aria-label="Default select example" required>                  
+              <option selected value="" disabled="disabled">Choose an option</option>
+            <% subcata.map((cataitem, index)=> {%> 
+              <option value='<%= cataitem.subcatagoryname %>'>
+                  <%= cataitem.subcatagoryname %>                    
+              </option>
             <% })%>
             </select>              
         </div>
@@ -71,7 +77,7 @@
         <div class="col">
           <div class="form-outline">
             <label class="form-label" for="form3Example1">Product Price *Tk</label>
-          <input type="number" name="productprice" id="form3Example1" class="form-control" required/>
+          <input type="number" placeholder="Product Price" name="productprice" id="form3Example1" class="form-control" required/>
           </div>
         </div>
 
@@ -87,8 +93,9 @@
         <div class="col">
           <label class="form-label" for="form3Example1">Product Size</label>
           <div class="form-outline">
-            <select class="select" name="productsize" class="form-select"aria-label="Default select example">
-              <option selected value="Smal">Smal</option>
+            <select class="select" name="productsize" class="form-select"aria-label="Default select example" required>
+              <option selected value="" disabled="disabled">Choose an option</option>
+              <option  value="Smal">Smal</option>
               <option value="Medium">Medium</option>
               <option value="Large">Large</option>
             </select>
@@ -98,17 +105,25 @@
         <div class="col">
           <label class="form-label" for="form3Example1">Product Offer</label>
           <div class="form-outline">
-            <select class="select" name="productoffer" class="form-select"aria-label="Default select example">              
-              <option value="Yes">Yes</option>
-              <option value="No">No</option>
+            <select class="select" class="required" name="productoffer" class="form-select"aria-label="Default select example" required>
+              <option selected value="" disabled="disabled">Choose an option</option>
+              <option value="Yes" onclick="yes()">Yes</option>
+              <option value="No" onclick="no()">No</option>
             </select>
           </div>
         </div>
-
+<script>
+  function yes(){
+    alert("yes")
+  }
+  function no(){
+    alert("no")
+  }
+</script>
         <div class="col">
           <label class="form-label" for="form3Example2">Product Offer Price *Tk</label>
           <div class="form-outline">
-            <input type="number" id="favcolor" name="productofferprice" class="form-control" required/>            
+            <input type="number" id="favcolor" placeholder="Product Offer Price" name="productofferprice" class="form-control" required/>            
             <br/>
           </div>
         </div>
@@ -116,7 +131,7 @@
         <div class="col">
           <label class="form-label" for="form3Example2">Product Color </label>
           <div class="form-outline">
-            <input type="color" id="favcolor" name="productcolor" value="#AFFF33" class="form-control" required/>            
+            <input type="color" id="favcolor" required name="productcolor" class="form-control"/>            
             <br/>
           </div>
         </div>      
